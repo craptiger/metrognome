@@ -3,22 +3,22 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/metrogonome/',
+  base: '/metrognome/',
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Metronome PWA',
-        short_name: 'Metronome',
+        name: 'Metrognome PWA',
+        short_name: 'Metrognome',
         description: 'A simple installable metronome with time signature and BPM controls.',
         theme_color: '#111827',
         background_color: '#f4f4f5',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/metrogonome/',
-        scope: '/metrogonome/',
+        start_url: '/metrognome/',
+        scope: '/metrognome/',
         icons: [
           {
             src: 'pwa-192x192.png',
