@@ -135,16 +135,21 @@ body {
   margin: 0 auto;
   border: 6px solid #d4d4d8;
   border-radius: 36px;
-  background: #ffffff;
   color: #0f172a;
   display: grid;
   place-items: center;
   text-align: center;
-  transition: background-color 0.08s ease, transform 0.08s ease;
+  transition: background-color 0.15s ease;
 }
 
-.pulse-box.flash {
+.pulse-box.white {
+  background: #ffffff;
+}
+
+.pulse-box.green {
   background: #4ade80;
+}
+.pulse-box.flash {
   transform: scale(1.01);
 }
 
