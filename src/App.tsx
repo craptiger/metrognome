@@ -224,7 +224,7 @@ function App() {
         </div>
 
         <div className="pulse-wrapper" aria-live="polite">
-          <div className={`pulse-box ${isFlashing ? 'flash' : ''}`}>
+          <div className={`pulse-box ${isGreen ? 'green' : 'white'}`}>
             <span>{isRunning ? `Beat ${beatInBar}` : 'Ready'}</span>
           </div>
         </div>
