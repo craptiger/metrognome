@@ -27,10 +27,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          registry-url: https://registry.npmjs.org
 
       - name: Install
-        run: npm install --include=dev
+        run: npm install
 
       - name: Check vite
         run: npx vite --version
