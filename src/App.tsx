@@ -4,7 +4,7 @@ type MaybeAudioContext = AudioContext | null;
 
 const MIN_BPM = 20;
 const MAX_BPM = 300;
-const FLASH_MS = 140;
+
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
@@ -23,7 +23,7 @@ function App() {
   const [denominatorText, setDenominatorText] = useState('4');
   const [bpmText, setBpmText] = useState('120');
   const [isRunning, setIsRunning] = useState(false);
-  const [isFlashing, setIsFlashing] = useState(false);
+  const [isGreen, setIsGreen] = useState(false);
   const [beatInBar, setBeatInBar] = useState(1);
   const [audioEnabled, setAudioEnabled] = useState(true);
 
@@ -32,7 +32,6 @@ function App() {
   const bpm = useMemo(() => clamp(sanitizePositiveInteger(bpmText, 120), MIN_BPM, MAX_BPM), [bpmText]);
 
   const intervalRef = useRef<number | null>(null);
-  const flashTimeoutRef = useRef<number | null>(null);
   const audioContextRef = useRef<MaybeAudioContext>(null);
   const beatCounterRef = useRef(0);
 
@@ -113,17 +112,11 @@ function App() {
     const isBarStart = currentBeat === 1;
 
     setBeatInBar(currentBeat);
-    setIsFlashing(true);
+    
     playClick(isBarStart);
 
-    if (flashTimeoutRef.current) {
-      window.clearTimeout(flashTimeoutRef.current);
-    }
-
-    flashTimeoutRef.current = window.setTimeout(() => {
-      setIsFlashing(false);
-    }, FLASH_MS);
-
+    setIsGreen((prev) => !prev);
+    
     beatCounterRef.current += 1;
   }
 
@@ -132,17 +125,11 @@ function App() {
       window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-
-    if (flashTimeoutRef.current) {
-      window.clearTimeout(flashTimeoutRef.current);
-      flashTimeoutRef.current = null;
-    }
   }
 
   function stopMetronome(): void {
     stopTimerOnly();
     setIsRunning(false);
-    setIsFlashing(false);
     setBeatInBar(1);
     beatCounterRef.current = 0;
   }
