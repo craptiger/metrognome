@@ -62,10 +62,14 @@ function App() {
     }
 
     if (!audioContextRef.current) {
-      const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+
       if (!AudioCtx) {
         return null;
       }
+
       audioContextRef.current = new AudioCtx();
     }
 
@@ -128,6 +132,7 @@ function App() {
       window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
+
     if (flashTimeoutRef.current) {
       window.clearTimeout(flashTimeoutRef.current);
       flashTimeoutRef.current = null;
@@ -183,9 +188,7 @@ function App() {
     <main className="app-shell">
       <section className="card">
         <div className="title-block">
-          <p className="eyebrow">Installable PWA</p>
-          <h1>Metronome</h1>
-          <p className="subtitle">Simple visual pulse with time signature and tempo controls.</p>
+          <h1>Metrognome</h1>
         </div>
 
         <div className="control-group">
@@ -237,7 +240,6 @@ function App() {
           <div className={`pulse-box ${isFlashing ? 'flash' : ''}`}>
             <span>{isRunning ? `Beat ${beatInBar}` : 'Ready'}</span>
           </div>
-          <p className="pulse-caption">Square flashes green on the beat and white between beats.</p>
         </div>
 
         <div className="info-row">
